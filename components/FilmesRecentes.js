@@ -1,13 +1,44 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-import FilmesRecentes from './components/FilmesRecentes';
-import FilmesAvaliados from './components/FilmesAvaliados';
+import { useState } from 'react';
 
-export default function App() {
+export default function filmesRecentes() {
+
+  const [filmesRecentes, setFilmesRecentes] = useState([ 
+    {
+      id: 1,
+      titulo: 'Cocaine Bear', 
+      genero: 'Ficção', 
+      imagem: 'https://m.media-amazon.com/images/M/MV5BODAwZDQ5ZjEtZDI1My00MTFiLTg0ZjUtOGE2YTBkOTdjODFhXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg',
+    },
+    {
+      id: 2,
+      titulo: 'Rubber, O Pneu Assassino',
+      genero: 'Terror', 
+      imagem: 'https://www.cafecomfilme.com.br/media/k2/items/cache/e027c4032dd7e9a75b2ece7beabff93c_XL.jpg?t=20170825_164600',
+    },
+    {
+      id: 3,
+      titulo: 'Onde os fracos não têm vez', 
+      genero: 'Suspense, Drama', 
+      imagem: 'https://br.web.img3.acsta.net/pictures/210/079/21007978_20130523175557996.jpg',
+    },
+    {
+      id: 4,
+      titulo: 'Click',
+      genero: 'Comédia, Drama',
+      imagem: 'https://www.cafecomfilme.com.br/media/k2/items/cache/99a55ddf297fe1c0e5cd25b32402e97a_XL.jpg?t=20200716_212331',
+    },
+    {
+      id: 5,
+      titulo: 'Ataque Do Tubarão De 5 Cabeças',
+      genero: 'Terror',
+      imagem: 'https://br.web.img2.acsta.net/pictures/22/04/28/18/27/3434343.png',
+    },
+  ]);
 
   function Card(props){
     function excluirFilme() {
-      setFilmesRecentes(filmesRecentes.filter(filme => filme.id !== props.filme.id)),
-      setFilmesAvaliados(filmesAvaliados.filter(filme => filme.id !== props.filme.id));
+      setFilmesRecentes(filmesRecentes.filter(filme => filme.id !== props.filme.id));
     }
     return(
       <View style={styles.filmes}>
@@ -22,39 +53,16 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView> 
-        <Text style={styles.nome}>Filmes</Text>
-        <FilmesRecentes />
-        <FilmesAvaliados />
-      </ScrollView>
+    <View>
+      <Text style={styles.categoria}>Recentes</Text>
+        <ScrollView horizontal pagingEnabled>
+          {filmesRecentes.map(filme => <Card key={filme.id} filme={filme} />)}
+        </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-  },
-  nome: {
-    fontSize: 50,
-    backgroundColor: '#f0f0f0',
-    width: '100%',
-    textAlign: 'center',
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity:  0.20,
-    shadowRadius: 5.62,
-    elevation: 7,
-    marginBottom: 10,
-  },
   filmes: {
     width: 150,
     height: 370,

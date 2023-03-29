@@ -1,12 +1,43 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-import FilmesRecentes from './components/FilmesRecentes';
-import FilmesAvaliados from './components/FilmesAvaliados';
+import { useState } from 'react';
 
-export default function App() {
+export default function filmesRecentes() {
+
+    const [filmesAvaliados, setFilmesAvaliados] = useState([ 
+        {
+          id: 6,
+          titulo: 'Call of Gruty', 
+          genero: 'Ação, Drama', 
+          imagem: 'https://static.wikia.nocookie.net/unmario/images/6/68/DfVsX7yWAAIhcje.jpg/revision/latest?cb=20180708224427',
+        },
+        {
+          id: 7,
+          titulo: 'John Wick 4: Baba Yaga',
+          genero: 'Ação', 
+          imagem: 'https://www.shoppingcidadedasflores.com.br/wp-content/uploads/sites/244/2023/03/12654_medio.jpg',
+        },
+        {
+          id: 8,
+          titulo: 'Jogos Mortais: Jigsaw', 
+          genero: 'Terror, Suspense', 
+          imagem: 'https://br.web.img3.acsta.net/pictures/17/11/17/23/57/4731159.jpg',
+        },
+        {
+          id: 9,
+          titulo: 'Velozes & Furiosos 10',
+          genero: 'Ação',
+          imagem: 'https://p2.trrsf.com/image/fget/cf/774/0/images.terra.com/2023/03/15/250607309-24954792ccec90c1f7b67228dd0c9760.jpg',
+        },
+        {
+          id: 10,
+          titulo: 'Piranha 2',
+          genero: 'Terror, Comédia',
+          imagem: 'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/d6c7b1d31e9645e99ffb8427d97046560df0609546ac1cd0851df0f891d5e602._RI_V_TTW_.jpg',
+        },
+      ]);
 
   function Card(props){
     function excluirFilme() {
-      setFilmesRecentes(filmesRecentes.filter(filme => filme.id !== props.filme.id)),
       setFilmesAvaliados(filmesAvaliados.filter(filme => filme.id !== props.filme.id));
     }
     return(
@@ -22,39 +53,16 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView> 
-        <Text style={styles.nome}>Filmes</Text>
-        <FilmesRecentes />
-        <FilmesAvaliados />
-      </ScrollView>
+    <View>
+      <Text style={styles.categoria}>Recentes</Text>
+        <ScrollView horizontal pagingEnabled>
+          {filmesAvaliados.map(filme => <Card key={filme.id} filme={filme} />)}
+        </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-  },
-  nome: {
-    fontSize: 50,
-    backgroundColor: '#f0f0f0',
-    width: '100%',
-    textAlign: 'center',
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity:  0.20,
-    shadowRadius: 5.62,
-    elevation: 7,
-    marginBottom: 10,
-  },
   filmes: {
     width: 150,
     height: 370,
