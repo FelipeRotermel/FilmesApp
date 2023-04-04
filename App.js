@@ -1,35 +1,25 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-import FilmesRecentes from './components/FilmesRecentes';
-import FilmesAvaliados from './components/FilmesAvaliados';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider as PaperProvider } from 'react-native-paper';
+import FilmesRecentes from './screens/FilmesRecentes';
+import FilmesAvaliados from './screens/FilmesAvaliados';
+import Home from './components/NavBar';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  function Card(props){
-    function excluirFilme() {
-      setFilmesRecentes(filmesRecentes.filter(filme => filme.id !== props.filme.id)),
-      setFilmesAvaliados(filmesAvaliados.filter(filme => filme.id !== props.filme.id));
-    }
-    return(
-      <View style={styles.filmes}>
-        <Image style={styles.imagens} source={{uri: props.filme.imagem}} />
-        <Text style={styles.titulo}>{props.filme.titulo}</Text>
-        <Text style={styles.texto}>{props.filme.genero}</Text>
-        <TouchableOpacity onPress={excluirFilme}>
-          <Image style={styles.lixo} source={{uri: 'https://cdn-icons-png.flaticon.com/512/2891/2891491.png'}} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
   return (
-    <View style={styles.container}>
-      <ScrollView> 
-        <Text style={styles.nome}>Filmes</Text>
-        <FilmesRecentes />
-        <FilmesAvaliados />
-      </ScrollView>
-    </View>
-  );
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Filmes Recentes" component={FilmesRecentes} />
+          <Stack.Screen name="Filmes Avaliados" component={FilmesAvaliados} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
+  )
 }
 
 const styles = StyleSheet.create({

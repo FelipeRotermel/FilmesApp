@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 
-export default function filmesRecentes() {
+export default function FilmesAvaliados() {
 
     const [filmesAvaliados, setFilmesAvaliados] = useState([ 
         {
