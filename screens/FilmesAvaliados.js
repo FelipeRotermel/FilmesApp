@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
+import { DefaultTheme } from 'react-native-paper';
 
 export default function FilmesAvaliados() {
 
@@ -53,8 +54,8 @@ export default function FilmesAvaliados() {
   }
 
   return (
-    <View>
-      <Text style={styles.categoria}>Recentes</Text>
+    <View style={styles.container}>
+      <Text style={styles.categoria}>Avaliados</Text>
         <ScrollView horizontal pagingEnabled>
           {filmesAvaliados.map(filme => <Card key={filme.id} filme={filme} />)}
         </ScrollView>
@@ -63,11 +64,15 @@ export default function FilmesAvaliados() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: DefaultTheme.colors.secondaryContainer,
+    height: '100%',
+  },
   filmes: {
     width: 150,
     height: 370,
     paddingBottom: 10,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     justifyContent: 'center', 
     borderRadius: 10,
     shadowColor: "#000000",

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
+import { DefaultTheme } from 'react-native-paper';
 
 export default function FilmesRecentes() {
 
@@ -53,7 +54,7 @@ export default function FilmesRecentes() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.categoria}>Recentes</Text>
         <ScrollView horizontal pagingEnabled>
           {filmesRecentes.map(filme => <Card key={filme.id} filme={filme} />)}
@@ -63,6 +64,10 @@ export default function FilmesRecentes() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: DefaultTheme.colors.secondaryContainer,
+    height: '100%',
+  },
   filmes: {
     width: 150,
     height: 370,
